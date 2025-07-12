@@ -4,14 +4,13 @@ import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 import org.fd.project.shared.constant.enums.ResponseEnum;
-import org.fd.project.shared.dto.attribute.ErrorDetail;
-import org.fd.project.shared.dto.attribute.PaginationConfig;
-import org.fd.project.shared.dto.template.ResponseCollection;
+import org.fd.project.shared.dto.attribute.ErrorAttribute;
+import org.fd.project.shared.dto.attribute.MetaAttribute;
+import org.fd.project.shared.dto.template.ResponseMeta;
 import org.fd.project.shared.dto.template.ResponseData;
 import org.fd.project.shared.dto.template.ResponseError;
 import org.fd.project.shared.dto.template.ResponseList;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -45,32 +44,32 @@ public class ResponseHelper {
     return ResponseEntity
             .status(responseEnum.getHttpStatus())
             .body(ResponseList.<T>builder()
-                    .responseSchema(responseMessageHelper.getResponseSchema(responseEnum))
+                    .responseSchemaAttribute(responseMessageHelper.getResponseSchema(responseEnum))
                     .data(list)
                     .build());
   }
 
   public ResponseEntity<ResponseError> createResponseError(
       ResponseEnum responseEnum,
-      List<ErrorDetail> errorDetails
+      List<ErrorAttribute> errorAttributes
   ) {
     return ResponseEntity
             .status(responseEnum.getHttpStatus())
             .body(ResponseError.builder()
                     .responseSchema(responseMessageHelper.getResponseSchema(responseEnum))
-                    .errors(errorDetails)
+                    .errors(errorAttributes)
                     .build());
   }
 
-  public <T> ResponseEntity<ResponseCollection<T>> createResponseCollection(
+  public <T> ResponseEntity<ResponseMeta<T>> createResponseMeta(
           ResponseEnum responseEnum,
           Page<T> page
   ) {
     return ResponseEntity
             .status(responseEnum.getHttpStatus())
-            .body(ResponseCollection.<T>builder()
+            .body(ResponseMeta.<T>builder()
                     .responseSchema(responseMessageHelper.getResponseSchema(responseEnum))
-                    .pagination(new PaginationConfig(page.getNumber(), page.getSize(), page.getTotalElements()))
+                    .meta(MetaAttribute.builder().page(page.getNumber()).size(page.getSize()).total(page.getTotalElements()).build())
                     .data(page.getContent())
                     .build());
   }

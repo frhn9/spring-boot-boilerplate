@@ -8,12 +8,15 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ErrorDetail {
+public class MetaAttribute {
 
-  @JsonProperty("field")
-  private String field;
+	@JsonProperty("page")
+	private int page;
 
-  @JsonProperty("message")
-  private String message;
+	@JsonProperty("size")
+	private int size;
+
+	@JsonProperty("total")
+	private long total;
 
 }

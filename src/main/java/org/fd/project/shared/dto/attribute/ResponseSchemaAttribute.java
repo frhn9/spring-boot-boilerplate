@@ -8,12 +8,12 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponseSchema {
+public class ResponseSchemaAttribute {
 
-  @JsonProperty("response_code")
+  @JsonProperty("responseCode")
   private String responseCode;
 
-  @JsonProperty("response_message")
+  @JsonProperty("responseMessage")
   private String responseMessage;
 
 }

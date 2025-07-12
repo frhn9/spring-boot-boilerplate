@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 import lombok.*;
-import org.fd.project.shared.dto.attribute.ErrorDetail;
-import org.fd.project.shared.dto.attribute.ResponseSchema;
+import org.fd.project.shared.dto.attribute.ErrorAttribute;
+import org.fd.project.shared.dto.attribute.ResponseSchemaAttribute;
 
 @Getter
 @Setter
@@ -14,10 +14,10 @@ import org.fd.project.shared.dto.attribute.ResponseSchema;
 @AllArgsConstructor
 public class ResponseError {
 
-  @JsonProperty("response_schema")
-  private ResponseSchema responseSchema;
+  @JsonProperty("responseSchema")
+  private ResponseSchemaAttribute responseSchema;
 
   @JsonProperty("errors")
-  private List<ErrorDetail> errors;
+  private List<ErrorAttribute> errors;
 
 }

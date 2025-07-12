@@ -2,7 +2,7 @@ package org.fd.project.shared.dto.template;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.fd.project.shared.dto.attribute.ResponseSchema;
+import org.fd.project.shared.dto.attribute.ResponseSchemaAttribute;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 public class ResponseList<T> {
 
-  @JsonProperty("response_schema")
-  private ResponseSchema responseSchema;
+  @JsonProperty("responseSchema")
+  private ResponseSchemaAttribute responseSchemaAttribute;
 
   @JsonProperty("data")
   private List<T> data;

@@ -8,15 +8,12 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaginationConfig {
+public class ErrorAttribute {
 
-	@JsonProperty("page")
-	private int page;
+  @JsonProperty("field")
+  private String field;
 
-	@JsonProperty("size")
-	private int size;
-
-	@JsonProperty("total")
-	private long total;
+  @JsonProperty("message")
+  private String message;
 
 }

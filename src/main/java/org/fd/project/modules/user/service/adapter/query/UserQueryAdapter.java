@@ -7,9 +7,6 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface UserQueryAdapter {
-
     Page<User> findAll(Pageable pageable);
-
     Optional<User> findById(Integer id);
-
 }

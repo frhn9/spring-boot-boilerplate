@@ -9,11 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.fd.project.shared.constant.enums.ResponseEnum;
-import org.fd.project.shared.dto.attribute.ErrorDetail;
+import org.fd.project.shared.dto.attribute.ErrorAttribute;
 import org.fd.project.shared.dto.template.ResponseError;
 import org.fd.project.shared.utils.ResponseHelper;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -48,12 +48,12 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
   protected ResponseEntity<Object> handleMethodArgumentNotValid(
           MethodArgumentNotValidException ex,
           HttpHeaders headers,
-          org.springframework.http.HttpStatusCode status,
+          HttpStatusCode status,
           WebRequest request
   ) {
-    List<ErrorDetail> errors = new ArrayList<>();
+    List<ErrorAttribute> errors = new ArrayList<>();
     ex.getFieldErrors().forEach(fieldError ->
-            errors.add(new ErrorDetail(fieldError.getField(), fieldError.getDefaultMessage()))
+            errors.add(ErrorAttribute.builder().field(fieldError.getField()).message(fieldError.getDefaultMessage()).build())
     );
 
     return ResponseEntity.badRequest()
