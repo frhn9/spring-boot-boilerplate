@@ -1,9 +1,9 @@
 package org.fd.project.shared.constant.enums;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+@Getter
 public enum ResponseEnum {
   SUCCESS("PMRK-200", "success", HttpStatus.OK),
   JSON_PLACE_HOLDER_POST_NOT_FOUND("PMRK-0001", "jph.post.not.found", HttpStatus.NOT_FOUND),
@@ -21,15 +21,4 @@ public enum ResponseEnum {
     this.httpStatus = httpStatus;
   }
 
-  public String getResponseCode() {
-    return responseCode;
-  }
-
-  public String getResponseMessage() {
-    return responseMessage;
-  }
-
-  public HttpStatus getHttpStatus() {
-    return httpStatus;
-  }
 }
