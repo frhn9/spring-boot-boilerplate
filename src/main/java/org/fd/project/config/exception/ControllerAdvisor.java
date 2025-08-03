@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.concurrent.CompletionException;
+
 @Slf4j
 @ControllerAdvice
 @RequiredArgsConstructor
@@ -30,7 +32,18 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(ModuleException.class)
   public ResponseEntity<ResponseError> handleException(ModuleException exception) {
+    log.error("Error : {}", exception.getResponseEnum());
     return responseHelper.createResponseError(exception.getResponseEnum(), null);
+  }
+
+  @ExceptionHandler(CompletionException.class)
+  public ResponseEntity<ResponseError> handleException(CompletionException exception) {
+    Throwable cause = exception.getCause();
+    if (cause instanceof ModuleException moduleException) {
+      return handleException(moduleException);
+    }
+
+    return responseHelper.createResponseError(ResponseEnum.INTERNAL_SERVER_ERROR, null);
   }
 
   @ExceptionHandler(Exception.class)

@@ -1,10 +1,10 @@
-FROM maven:alpine as build
+FROM maven:alpine AS build
 ENV HOME=/usr/app
-RUN mkdir -p $HOME
+RUN "mkdir -p $HOME"
 WORKDIR $HOME
-ADD pom.xml $HOME
+COPY pom.xml $HOME
 RUN mvn verify --fail-never -DskipTests
-ADD . $HOME
+COPY . $HOME
 RUN mvn package -DskipTests
 
 FROM openjdk:21-jdk

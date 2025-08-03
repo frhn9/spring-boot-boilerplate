@@ -5,11 +5,14 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public enum ResponseEnum {
-  SUCCESS("PMRK-200", "success", HttpStatus.OK),
-  JSON_PLACE_HOLDER_POST_NOT_FOUND("PMRK-0001", "jph.post.not.found", HttpStatus.NOT_FOUND),
+  SUCCESS("success", "success", HttpStatus.OK),
+  BALANCE_INSUFFICIENT("balance_insufficient", "balance.insufficient", HttpStatus.BAD_REQUEST),
+  SAVINGS_ACCOUNT_NOT_FOUND("savings_account_not_found", "savings.account.not.found", HttpStatus.NOT_FOUND),
+  PAYMENT_TYPE_NOT_FOUND("payment_type_not_found", "payment.type.not.found", HttpStatus.NOT_FOUND),
+  USER_BLOCKED_BY_BANK("user_blocked_by_bank", "user.blocked.by.bank", HttpStatus.FORBIDDEN),
 
-  INVALID_PARAM("PMRK-0009", "invalid.param", HttpStatus.BAD_REQUEST),
-  INTERNAL_SERVER_ERROR("PMRK-9999", "internal.server.error", HttpStatus.INTERNAL_SERVER_ERROR);
+  INVALID_PARAM("invalid_param", "invalid.param", HttpStatus.BAD_REQUEST),
+  INTERNAL_SERVER_ERROR("internal_server_error", "internal.server.error", HttpStatus.INTERNAL_SERVER_ERROR);
 
   private final String responseCode;
   private final String responseMessage;
